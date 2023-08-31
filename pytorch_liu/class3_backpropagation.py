@@ -27,7 +27,7 @@ if __name__ == '__main__':
             l = loss(x, y)  # l是一个张量，tensor主要是在建立计算图 forward, compute the
             l.backward()  # backward,compute grad for Tensor whose requires_grad set to True
             print('\tgrad:', x, y, w.grad.item())
-            w.data = w.data - 0.01 * w.grad.data  # 权重更新时，注意grad也是一个tensor
+            w.data = w.data - 0.01 * w.grad.item() # 权重更新时，注意grad也是一个tensor,防止构建计算图
 
             w.grad.data.zero_()  # after update, remember set the grad to zero
 
