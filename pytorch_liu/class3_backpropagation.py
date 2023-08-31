@@ -28,7 +28,8 @@ if __name__ == '__main__':
             l.backward()  # backward,compute grad for Tensor whose requires_grad set to True
             print('\tgrad:', x, y, w.grad.item())
             w.data = w.data - 0.01 * w.grad.item() # 权重更新时，注意grad也是一个tensor,防止构建计算图
-
+            #只有那些设置了requires_grad=True的张量（tensor）会跟踪其上的所有操作，从而构建一个计算图。这个计算图用于后续的自动微分。
+            #如果一个张量的requires_grad属性设置为False（这是默认值），那么在该张量上执行的操作不会被跟踪，因此不会构建计算图。
             w.grad.data.zero_()  # after update, remember set the grad to zero
 
         print('progress:', epoch, l.item())  # 取出loss使用l.item，不要直接使用l（l是tensor会构建计算图）
